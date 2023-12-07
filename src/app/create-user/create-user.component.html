@@ -1,0 +1,88 @@
+<div class="signUp-container">
+
+  <div class="signUp-form-container">
+    <h1 style="text-align: center; margin-top: 20px;">Add User Details</h1>
+    <form [formGroup]="createUserForm" (ngSubmit)="onCreateNewUser()">
+      <div class="input-container">
+        <input
+          type="text"
+          placeholder="Enter Email Id"
+          formControlName="email"
+        />
+        <div
+          class="error-msg"
+          *ngIf="
+            this.createUserForm.get('email')?.invalid &&
+            this.createUserForm.get('email')?.dirty &&
+            this.createUserForm.value.email.length > 10
+          ">
+
+          Invalid Email Id
+        </div>
+      </div>
+      <div class="input-container">
+          <input
+            type="text"
+            placeholder="Username"
+            formControlName="username"
+          />
+          <div
+            class="error-msg"
+            *ngIf="
+              this.createUserForm.get('username')?.invalid &&
+              this.createUserForm.get('username')?.dirty &&
+              this.createUserForm.value.email.length > 2
+            ">
+
+            Username must have atleast 4 characters
+          </div>
+        </div>
+      <div class="input-container">
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <div
+          class="error-msg"
+          *ngIf="
+            this.createUserForm.get('password')?.invalid &&
+            this.createUserForm.get('password')?.dirty &&
+            this.createUserForm.value.password.length >= 5
+          ">
+
+          Password should have atleast 6 characters
+        </div>
+      </div>
+      <div class="input-container">
+          <input
+            type="password"
+            placeholder="Password Confirm"
+            formControlName="passwordConfirm"
+          />
+          <div
+            class="error-msg"
+            *ngIf="
+              this.createUserForm.get('passwordConfirm')?.invalid &&
+              this.createUserForm.get('passwordConfirm')?.dirty &&
+              this.createUserForm.value.password.length >= 5
+            ">
+
+            Password confirm should have atleast 6 characters
+          </div>
+        </div>
+
+      <div class="input-container">
+        <button style="background-color: #9ADE7B;"
+          type="submit"
+          [ngClass]="{ ngdisabled: !this.createUserForm.valid }"
+          >
+
+          Add
+        </button>
+
+        <button style="margin-left: 30px; background-color: #F05941;">Delete</button>
+      </div>
+    </form>
+  </div>
+</div>

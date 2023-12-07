@@ -1,0 +1,85 @@
+<div class="signUp-container">
+
+  <div class="signUp-form-container">
+    <h1 style="text-align: center; margin-top: 20px;">Register Here</h1>
+    <form [formGroup]="signForm" (ngSubmit)="onSignUp()">
+      <div class="input-container">
+        <input
+          type="text"
+          placeholder="Enter Email Id"
+          formControlName="email"
+        />
+        <div
+          class="error-msg"
+          *ngIf="
+            this.signForm.get('email')?.invalid &&
+            this.signForm.get('email')?.dirty &&
+            this.signForm.value.email.length > 10
+          ">
+
+          Invalid Email Id
+        </div>
+      </div>
+      <div class="input-container">
+          <input
+            type="text"
+            placeholder="Username"
+            formControlName="username"
+          />
+          <div
+            class="error-msg"
+            *ngIf="
+              this.signForm.get('username')?.invalid &&
+              this.signForm.get('username')?.dirty &&
+              this.signForm.value.email.length > 2
+            ">
+
+            Username must have atleast 4 characters
+          </div>
+        </div>
+      <div class="input-container">
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <div
+          class="error-msg"
+          *ngIf="
+            this.signForm.get('password')?.invalid &&
+            this.signForm.get('password')?.dirty &&
+            this.signForm.value.password.length >= 5
+          ">
+
+          Password should have atleast 6 characters
+        </div>
+      </div>
+      <div class="input-container">
+          <input
+            type="password"
+            placeholder="Password Confirm"
+            formControlName="passwordConfirm"
+          />
+          <div
+            class="error-msg"
+            *ngIf="
+              this.signForm.get('passwordConfirm')?.invalid &&
+              this.signForm.get('passwordConfirm')?.dirty &&
+              this.signForm.value.password.length >= 5
+            ">
+
+            Password confirm should have atleast 6 characters
+          </div>
+        </div>
+
+      <div class="input-container">
+        <button
+          type="submit"
+          [ngClass]="{ ngdisabled: !this.signForm.valid }">Sign Up</button>
+
+       
+        <div>Already have an account <a routerLink="/login">Login</a> here</div>
+      </div>
+    </form>
+  </div>
+</div>

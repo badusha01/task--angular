@@ -1,0 +1,40 @@
+
+<div class="home-container">
+  <div class="home-add-search-container">
+    <div >
+      <button routerLink="/create-user" class="add-user-btn" >Add User <mat-icon class="align-icon" fontIcon="add"></mat-icon></button>
+    </div>
+
+    <div>
+      <form class="search-form">
+        <input class="search-input" type="text" placeholder="Search Users" />
+        <button class="search-button">
+          <mat-icon class="align-icon" fontIcon="search"></mat-icon>
+        </button>
+      </form>
+    </div>
+  </div>
+  <hr>
+   <div class="users-collection-container">
+        <table class="users-table">
+            <thead>
+                <tr class="table-head-row">
+                    <th>No</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users; let i = index">
+                    <td>{{i + 1}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td><button [routerLink]="'/update/' + user._id" class="user-btns btn-update">Update</button></td>
+                    <td><button class="user-btns btn-delete" (click)="onDeleteUser(user._id)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+   </div>
+</div>

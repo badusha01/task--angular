@@ -1,0 +1,142 @@
+<div class="update-user-container">
+  <div class="update-user-form-container">
+    <h1 class="heading">Update User</h1>
+    <form [formGroup]="updateUserForm" (ngSubmit)="onUpdateNewUser()">
+      <div class="input-container">
+        <input
+          type="text"
+          placeholder="Enter Email"
+          formControlName="email"
+        />
+        <div
+          class="error-msg"
+          *ngIf="
+            this.updateUserForm.get('email')?.invalid &&
+            this.updateUserForm.get('email')?.dirty &&
+            this.updateUserForm.value.email.length > 5
+          "
+        >
+          Invalid Email Id
+        </div>
+      </div>
+      <div class="input-container">
+        <input type="text" placeholder="Username" formControlName="username" />
+        <div
+          class="error-msg"
+          *ngIf="
+            this.updateUserForm.get('username')?.invalid &&
+            this.updateUserForm.get('username')?.dirty &&
+            this.updateUserForm.value.username.length > 2
+          "
+        >
+          Username must have atleast 4 characters
+        </div>
+      </div>
+
+      <ng-container *ngIf="isPasswordChange">
+
+
+
+        <div class="input-container">
+          <input
+            type="password"
+            placeholder="Current Password"
+            formControlName="curPassword"
+          />
+          <div
+            class="error-msg"
+            *ngIf="
+              this.updateUserForm.get('curPassword')?.invalid &&
+              this.updateUserForm.get('curPassword')?.dirty &&
+              this.updateUserForm.value.curPassword.length >= 5
+            "
+          >
+            Password should have atleast 6 characters
+          </div>
+        </div>
+        <!-- Password -->
+        <div class="input-container">
+          <input
+            type="password"
+            placeholder="New Password"
+            formControlName="newPassword"
+          />
+          <div
+            class="error-msg"
+            *ngIf="
+              this.updateUserForm.get('newPassword')?.invalid &&
+              this.updateUserForm.get('newPassword')?.dirty &&
+              this.updateUserForm.value.newPassword.length >= 5
+            "
+          >
+            Password should have atleast 6 characters
+          </div>
+        </div>
+
+
+        <div class="input-container">
+          <input
+            type="password"
+            placeholder="New Password Confirm"
+            formControlName="newPasswordConfirm"
+          />
+          <div
+            class="error-msg"
+            *ngIf="
+              this.updateUserForm.get('newPasswordConfirm')?.invalid &&
+              this.updateUserForm.get('newPasswordConfirm')?.dirty &&
+              this.updateUserForm.value.newPasswordConfirm.length >= 5
+            "
+          >
+            Password confirm should have atleast 6 characters
+          </div>
+        </div>
+
+        <div class="input-container">
+          <button
+            (click)="isPasswordChange = !isPasswordChange"
+            class="change-pswd-btn"
+          >
+            Don't Change Password
+          </button>
+        </div>
+      </ng-container>
+
+      <div class="input-container">
+        <div class="select-container">
+          <label for="role">Role of new User</label>&nbsp;&nbsp;&nbsp;
+          <select
+            class="select-tag"
+            name="role"
+            id="role"
+            formControlName="role"
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+      </div>
+      <ng-container *ngIf="!isPasswordChange">
+        <div class="input-container">
+          <button
+            (click)="isPasswordChange = !isPasswordChange"
+            class="change-pswd-btn"
+          >
+            Change Password
+          </button>
+        </div>
+      </ng-container>
+      <div class="input-container">
+        <button
+          type="submit"
+          [ngClass]="{ ngdisabled: !this.updateUserForm.valid }"
+        >
+          Create
+        </button>
+
+
+        <div>Already have an account <a routerLink="/login">Login</a> here</div>
+      </div>
+    </form>
+  </div>
+</div>
